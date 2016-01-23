@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>AjaxContactForm - DemoPage</title>
+        
+        <!-- {BANNER} -->
+        
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!-- build:css ajax-contact-form/css/ajaxContactForm.min.css -->
+        <link rel="stylesheet" href="ajax-contact-form/css/ajaxContactForm.css">
+        <!-- /build -->
+        <link rel="stylesheet" href="ajax-contact-form.css">
+        
+    </head>
+    
+    <body>
+        <div class="container">
+            
+            <header class="row">
+                <div class="col-md-12">
+                    <h1><span class="glyphicon glyphicon-send"></span> AjaxContactForm <small>Demo Page</small></h1>
+                    <p>
+                        This is a demo of <strong>AjaxContactForm</strong>.<br>You can find some documentation at <a href="https://github.com/Gix075/ajax-contact-form/wiki" title="Documentation" target="_blank">https://github.com/Gix075/ajax-contact-form/wiki</a>
+                    </p>
+                </div>
+            </header> 
+            
+            <div class="row">
+                
+                <div class="col-md-5 col-md-offset-2">
+                    
+                    <!-- ============================================================== -->
+                    <!-- AJAX CONTACT FORM MARKUP -->
+                    <!-- ============================================================== -->
+                    <form id="ajaxContactForm" class="acf_form">
+                        
+                        <!-- Field: Name -->
+                        <div class="form-group">
+                            <label for="acf_name">Your Name</label>
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> This field is mandatary
+                            </div>
+                            <input type="text" class="form-control validate" id="acf_name" name="acf_name" placeholder="Your Name and Surname">
+                        </div>
+                        
+                        <!-- Field: Email -->
+                        <div class="form-group">
+                            <label for="acf_email">Your Email</label>
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> 
+                                <span class="error-empty">Empty Field</span>
+                                <span class="error-wrong">Mail not correct</span>
+                            </div>
+                            <input type="text" class="form-control validate email-format" id="acf_email" name="acf_email" placeholder="Your e-mail address">
+                        </div>
+                        
+                        <!-- Field: Email Confirm -->
+                        <div class="form-group">
+                            <label for="acf_email-confirm">Confirm Your Email</label>
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> <span class="error-empty">Empty Field</span>
+                                <span class="error-wrong">Mail not confirmed</span>
+                            </div>
+                            <input type="text" class="form-control validate email-format" data-confirm="#acf_email" id="acf_email-confirm" name="acf_email-confirm" placeholder="Repeat your e-mail address">
+                        </div>
+                        
+                        <!-- Field: Message -->
+                        <div class="form-group">
+                            <label for="acf_message">Your Message</label>
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> This field is mandatary
+                            </div>
+                            <textarea class="form-control validate" id="acf_message" name="acf_message" placeholder="Write here your message"></textarea>
+                        </div>
+                        
+                        <!-- Field: Privacy -->
+                        <div class="form-group checkbox-group validate">
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> You must accept our privacy policy before sending message
+                            </div> 
+                            <label>
+                                <input type="checkbox" id="acf_privacy" value="1" aria-label="Accept privacy policy">
+                                I accept the <a href="#">privacy policy</a> of this website.
+                            </label>
+                        </div>
+                        
+                        <!-- Field: Recaptcha -->
+                        <div class="form-group">
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> It seems that you are a robot!
+                            </div> 
+                            <div id="ajaxContactForm_recaptcha" class="acf_recaptcha">
+                                
+                            </div>
+                        </div>
+                        
+                        <!-- Field: Submit Button -->
+                        <div class="form-group">
+                            <p>
+                                <button id="ajaxContactFormBtn" class="btn btn-info"><span class="glyphicon glyphicon-send"></span> Send Message</button>
+                            </p>
+                        </div>
+                        
+                        <!-- Spinner -->
+                        <div class="acf_spinner-wrapper">
+                            <div class="acf_spinner">
+                                <div class="acf_spinner-inner"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Message Box -->
+                        <div class="acf_messagebox">
+                            <div class="acf_messagebox_text msg-success">
+                                <h4>Success!</h4>
+                                <p>Your Message has be sent!</p>
+                                <p><button class="btn btn-default acf_close-msg"><span class="glyphicon glyphicon-remove"></span> Close this message</button></p>
+                            </div>
+                            <div class="acf_messagebox_text msg-error">
+                                <h4>Sorry!</h4>
+                                <p>Your Message has not be sent!</p>
+                                <p><button class="btn btn-danger acf_close-msg"><span class="glyphicon glyphicon-remove"></span> Close this message and try again</button></p>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <!-- ============================================================== -->
+                    
+                </div> <!-- /col-md-5 -->
+                <div class="col-md-3">
+                    <h3>Warning</h3>
+                    <p>To use this demo you need to configure the contact form customizing the following files: <strong>ajax-contact-form.js</strong> and <strong>ajax-contact-form/php/config.php</strong></p>
+                    <h3>Google ReCaptha</h3>
+                    <p>
+                        Before using this tool you must obtain publick and private keys for the Google Recaptcha.<br>
+                        You can find keys at <a href="https://www.google.com/recaptcha/" title="Google Recaptcha">https://www.google.com/recaptcha/</a>
+                    </p>
+                </div>
+            </div> <!-- /row -->
+        </div> <!-- container -->
+        
+        <footer class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    &copy; 2013/2016 by Gix075 & BRAINLEAF Communication | Released under MIT License
+                </div>
+            </div>
+        </footer>
+        
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- build:js ajax-contact-form/js/ajaxContactForm.min.js -->
+        <script src="ajax-contact-form/js/ajaxContactForm_validator.js"></script>
+        <script src="ajax-contact-form/js/ajaxContactForm_recaptcha.js"></script>
+        <script src="ajax-contact-form/js/ajaxContactForm.js"></script>
+        <!-- /build -->
+        <script src="ajax-contact-form.js"></script>
+        
+    </body>
+</html>

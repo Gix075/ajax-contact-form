@@ -1,0 +1,41 @@
+{
+  "name": "ajax-contact-form",
+  "title": "AjaxContactForm",
+  "version": "1.5.0",
+  "description": "Simple ajax contact form",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "home": "https://github.com/Gix075/ajax-contact-form",    
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gix075/ajax-contact-form"
+  },
+  "dev": {
+    "devDir": "src/ajax-contact-form",
+    "distDir": "dist/ajax-contact-form"
+  },
+  "keywords": [
+    "ajax",
+    "contact",
+    "form",
+    "form",
+    "contact",
+    "php",
+    "javascript"
+  ],
+  "author": "Gix075",
+  "license": "MIT",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-processhtml": "^0.3.8",
+    "grunt-string-replace": "^1.2.1"
+  }
+}

@@ -1,0 +1,52 @@
+/*! 
+ * ************************************************************************* 
+ *  AjaxContactForm | Simple ajax contact form 
+ *  Version 1.5.0 - Date: 23/01/2016 
+ *  HomePage: https://github.com/Gix075/ajax-contact-form 
+ * ************************************************************************* 
+*/ 
+
+
+body {
+    background: #333;
+    color: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+a {
+    color: #31b0d5;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #31b0d5;
+    text-decoration: underline;
+}
+
+header {
+    text-align: center;
+    margin: 40px 0;
+}
+
+header p {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+h1 {
+    color: #31b0d5;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+h1 small {
+    display: block;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+footer {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 0.8em;
+}

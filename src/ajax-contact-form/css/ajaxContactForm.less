@@ -1,0 +1,136 @@
+// Variables
+// ========================================
+
+@spinner_size: 50px;
+@spinner_border-width: 5px;
+@spinner_background: #333;
+@spinner_border-base: #efefef;
+@spinner_border-over: #555;
+
+// Style
+// ========================================
+
+.acf_form {
+    position: relative;
+}
+
+/* Result Messages */
+/* ************************** */
+.acf_messagebox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background: rgba(0,0,0,0.8);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .acf_messagebox_text {
+        background: #fff;
+        color: #333;
+        text-align: center;
+        padding: 20px 5px;
+        position: absolute;
+        top: 50%;
+        right: 30%;
+        bottom: auto;
+        left: 30%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+        
+        @media all and (max-width: 767px) {
+            right: 20%;
+            left: 20%;
+        }
+        
+        @media all and (max-width: 600px) {
+            right: 5%;
+            left: 5%;
+        }
+        
+    }
+}
+
+/* Validation Errors */
+/* ************************** */
+
+.acf_form {
+    .form-input-error-msg {
+        display: none;
+        padding: 4px 0;
+        margin-bottom: 5px;
+        color: red;
+        font-weight: bold;
+        font-size: 0.8em;
+        overflow: hidden;
+        span.error-empty, 
+        span.error-wrong {
+          display: none;
+        }
+        span.error-empty.show-error, 
+        span.error-wrong.show-error {
+          display: inline-block;
+        }
+    }
+    .form-input-error-msg.show-error {
+        display: block;
+    }
+    .alert.form-input-error-msg {
+        padding: 4px;
+        margin-bottom: 5px;
+        color: #a94442;
+        font-weight: bold;
+    }
+    .error {
+      border-color: red;
+    }
+}
+
+/* Spinner */
+/* ************************** */
+.acf_spinner-wrapper {
+    
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: @spinner_background;
+    
+    .acf_spinner {
+        position: absolute;
+        width: @spinner_size;
+        height: @spinner_size;
+        border: @spinner_border-width solid @spinner_border-base;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        margin: -@spinner_size/2 0 0 -@spinner_size/2;
+    }
+
+    .acf_spinner-inner {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        bottom: -5px;
+        left: -5px;
+        border-radius: 50%;
+        border-width: 5px;
+        border-style: solid;
+        border-color: @spinner_border-over transparent transparent transparent;
+        border-radius: 50%;
+        animation: infinite-spinning 1s linear infinite;
+    }
+}
+
+
+
+@keyframes infinite-spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
