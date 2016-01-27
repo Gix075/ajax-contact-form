@@ -3,15 +3,162 @@
 
 @spinner_size: 50px;
 @spinner_border-width: 5px;
-@spinner_background: #333;
-@spinner_border-base: #efefef;
+@spinner_background: @black;
+@spinner_border-base: @gray-extralight;
 @spinner_border-over: #555;
+
+@white: #fff;
+@black: #333;
+@black-alpha: rgba(0,0,0,0.7);
+
+@gray-extralight: #efefef;
+@gray-light: #ccc;
+@gray-middle: #999;
+@gray-dark: #555;
+
+@error-color: #a94442;
+
+@dragarea-color: inherit;
+@dragarea-background: @gray-middle;
+@dragarea-border: 5px solid @gray-light;
+
+@filelist-border: 1px solid @white;
+
+@progbar-height: 5px;
+@progbar-background-color: @gray-dark;
+@progbar-color: @gray-light;
+
+@removeicon-color: @black;
+@removeicon-background: @white;
+@removeicon-hover-color: @black;
+@removeicon-hover-background: @gray-light;
+
+//@bootstrap_error_red-1: ;
+//@bootstrap_error_red-2: ;
 
 // Style
 // ========================================
 
 .acf_form {
     position: relative;
+    
+    .acf-hidden-field {
+        display: none;
+    }
+    
+    .acf_attachments-dragarea {
+        padding: 5% 0;
+        border-radius: 10px;
+        border: @dragarea-border;
+        background: @dragarea-background;
+        color: @dragarea-color;
+        text-align: center;
+    }
+    
+    .acf_attachments-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li {
+            margin-bottom: 10px;
+            &:nth-child(2) {
+                border-top: @filelist-border;
+            }
+            &:last-child {
+                border-bottom: @filelist-border;
+                margin-bottom: 40px;
+            }
+            &:first-child {
+                margin: 0 0 10px 0;
+                border: none;
+            }
+        }
+    }
+    
+    .acf_attachments-progress {
+        display: none;
+        background: @progbar-background-color;
+        height: @progbar-height;
+        .acf_attachments-progbar {
+            width: 0;
+            height: @progbar-height;
+            background: @progbar-color;
+        }
+    }
+    
+    .acf_attachments-filename {
+        margin: 5px;
+        .filename {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .fileremove {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 22px;
+            background: @removeicon-background;
+            color: @removeicon-color;
+            text-align: center;
+            border-radius: 50%;
+            cursor: pointer;
+            -webkit-transition: background 0.2s ease, color 0.2s ease;
+                    transition: background 0.2s ease, color 0.2s ease;
+            &:hover {
+                background: @removeicon-hover-background;
+                color: @removeicon-hover-color;
+            }
+        }
+    }
+    
+    .acf_attachments-error-msg {
+        color: @error-color;
+        font-weight: bold;
+        display: block;
+    }
+    
+    .acf_attachments-filetimeout {
+        padding: 5px 0;
+    }
+    
+    .acf_attachments-processfail-msg {
+       padding: 5px;
+    }
+    
+    .acf_attachments-sizecontrol {
+        margin: 20px 0 0 0;
+        &:before,
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
+            float: none;
+        }
+        .acf_attachments-sizecontrol-display {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            float: left;
+            padding-right: 10px;
+            width: 120px;
+            .display_title {}
+            .display_current-amount {
+                display: inline-block;
+                &:after {
+                    content: "/";
+                    display: inline-block;
+                    padding: 0 0 0 5px;
+                }
+            }
+            .display_total-limit {
+                display: inline-block;
+            }
+        }
+    }
+    
 }
 
 /* Result Messages */
@@ -20,14 +167,14 @@
     display: none;
     position: fixed;
     z-index: 1;
-    background: rgba(0,0,0,0.8);
+    background: @black-alpha;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     .acf_messagebox_text {
-        background: #fff;
-        color: #333;
+        background: @white;
+        color: @black;
         text-align: center;
         padding: 20px 5px;
         position: absolute;
@@ -91,12 +238,13 @@
 .acf_spinner-wrapper {
     
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: @spinner_background;
+    background-color: @black-alpha;
+    z-index: 10;
     
     .acf_spinner {
         position: absolute;

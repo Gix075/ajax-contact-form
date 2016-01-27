@@ -12,20 +12,46 @@
 // AjaxContactForm Parameters
 // ================================
 var opts = {
-    form: "#ajaxContactForm", // contact form id
-    formBtn: "#ajaxContactFormBtn", // contact form submit button id
-    ws: 'ajax-contact-form/php/ajaxContactForm.json', // php webservice path (relative to the form page)
-    showMsg: true, // show success/fail message after message sending
+    form: "#ajaxContactForm",
+    formBtn: "#ajaxContactFormBtn",
+    ws: 'ajax-contact-form/php/ajaxContactForm.php',
+    showMsg: true,
     recaptcha: {
-        pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey", // Google ReCaptcha public key THIS IS MANDATORY - TOOL WILL NOT WORK WITHOUT THIS PARAMETER !!!!
-        element: "#ajaxContactForm_recaptcha", // Google ReCaptcha wrapper id
-        theme: "light", // Google ReCaptcha theme
-        ws: 'ajax-contact-form/php/ajaxContactForm_recaptcha.php' // php webservice path (relative to the form page)
-    }
+        pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey",
+        element: "ajaxContactForm_recaptcha",
+        theme: "light",
+        ws: 'ajax-contact-form/php/ajaxContactForm_recaptcha.php'
+    },
+    attachments: {
+        allowed: true,
+        ws: 'ajax-contact-form/php/attachments/ajaxContactForm_attachments.php',
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|pdf|zip)$/i,
+        maxFileSize: 20971520,
+        maxTotalSize: 20971520,
+        maxFiles: 10,
+        cleanAfterMinutes: 20
+    },
+    messages: {
+        attachments: {
+            clean: 'TIMEOUT - Your file was removed, please upload it again!',
+            fileRemoved: 'File removed!',
+            errors: {
+                uploadFailed: 'Upload failed!',
+                maxNumberOfFiles: 'Sorry, maximum number of files exceeded',
+                maxFileSize: 'Sorry, file too large!',
+                maxTotalSize: 'Sorry the attachment size amount exceeds the maximum quota!',
+                timeout: 'TIMEOUT - Your file was removed, please upload it again!',
+                fileType: 'File type not allowed!'
+            }
+        }
+    },
+    debug: true
 };
 
 
-$(document).on('ready', function() {
-    new ajaxContactForm(opts).init();
+
+$(window).on('load', function() {
+    new ajaxContactForm(opts).init();        
 });
+
 

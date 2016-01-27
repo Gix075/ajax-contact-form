@@ -1,0 +1,7 @@
+# ***************************************************************
+# AJAX CONTACT FORM - Attachments Cleaner Logs
+# ***************************************************************
+
+# FILE: [FILENAME] - [RESULT MESSAGE] - DATE: [DATE TIME]
+
+

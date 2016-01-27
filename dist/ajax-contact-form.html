@@ -3,6 +3,7 @@
     
     <head>
         <title>AjaxContactForm - DemoPage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- AjaxContactForm (v.1.5.0) | Simple ajax contact form -->
         
@@ -73,6 +74,29 @@
                             <textarea class="form-control validate" id="acf_message" name="acf_message" placeholder="Write here your message"></textarea>
                         </div>
                         
+                        <!-- Field: Attachments -->
+                        <div class="form-group">
+                            <label for="acf_attachments">Attachments</label>
+                            <p>Drag files on the box below or select them from your desktop.</p>
+                            <div class="form-input-error-msg alert alert-danger">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> This field is mandatary
+                            </div>
+                            <input type="hidden" class="validate" name="acf_attachments" id="acf_attachments">
+                            <div class="acf_attachments-dragarea">
+                                <span class="btn btn-success">Select file</span>
+                                <input type="file" class="acf-hidden-field" name="files[]" id="acf_attachments_files">
+                            </div>
+                            <div class="acf_attachments-sizecontrol">
+                            </div>
+                            <ul class="acf_attachments-list">
+                                <li>
+                                    <div class="acf_attachments-progress">
+                                        <div class="acf_attachments-progbar"></div>
+                                    </div>
+                                </li>                                
+                            </ul>
+                        </div>
+                        
                         <!-- Field: Privacy -->
                         <div class="form-group checkbox-group validate">
                             <div class="form-input-error-msg alert alert-danger">
@@ -118,6 +142,7 @@
                             <div class="acf_messagebox_text msg-error">
                                 <h4>Sorry!</h4>
                                 <p>Your Message has not be sent!</p>
+                                <p class="msg-error-info"></p>
                                 <p><button class="btn btn-danger acf_close-msg"><span class="glyphicon glyphicon-remove"></span> Close this message and try again</button></p>
                             </div>
                         </div>
@@ -149,7 +174,7 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="http://www.google.com/recaptcha/api.js" async defer></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="ajax-contact-form/js/ajaxContactForm.min.js"></script>
+        <script src="ajax-contact-form/js/ajaxContactForm.pack.min.js"></script>
         <script src="ajax-contact-form.js"></script>
         
     </body>

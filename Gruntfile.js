@@ -25,6 +25,8 @@ module.exports = function(grunt) {
                     '<%= pkg.dev.distDir %>/php/ajaxContactForm.php':'<%= pkg.dev.devDir %>/php/ajaxContactForm.php',
                     '<%= pkg.dev.distDir %>/php/ajaxContactForm_recaptcha.php':'<%= pkg.dev.devDir %>/php/ajaxContactForm_recaptcha.php',
                     '<%= pkg.dev.distDir %>/php/config.php':'<%= pkg.dev.devDir %>/php/config_dist.php',
+                    '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_attachments.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_attachments.php',
+                    '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_cleaner.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_cleaner.php',
                     'dist/ajax-contact-form.html':'src/ajax-contact-form.html',
                     'dist/ajax-contact-form.js':'src/ajax-contact-form_dist.js',
                     'dist/ajax-contact-form.css':'src/ajax-contact-form.css'
@@ -53,13 +55,25 @@ module.exports = function(grunt) {
                 separator: ';',
                 banner: '<%= meta.banner %>'
             },
-            dist: {
+            base: {
                 src: [
                     '<%= pkg.dev.devDir %>/js/ajaxContactForm_recaptcha.js',
                     '<%= pkg.dev.devDir %>/js/ajaxContactForm_validator.js',
                     '<%= pkg.dev.devDir %>/js/ajaxContactForm.js'
                 ],
                 dest: '<%= pkg.dev.distDir %>/js/ajaxContactForm.js'
+            },
+            pack: {
+                src: [
+                    '<%= pkg.dev.devDir %>/js/jquery.ui.widget.js',
+                    '<%= pkg.dev.devDir %>/js/jquery.fileupload.js',
+                    '<%= pkg.dev.devDir %>/js/jquery.fileupload-process.js',
+                    '<%= pkg.dev.devDir %>/js/jquery.fileupload-validate.js',
+                    '<%= pkg.dev.devDir %>/js/ajaxContactForm_recaptcha.js',
+                    '<%= pkg.dev.devDir %>/js/ajaxContactForm_validator.js',
+                    '<%= pkg.dev.devDir %>/js/ajaxContactForm.js'
+                ],
+                dest: '<%= pkg.dev.distDir %>/js/ajaxContactForm.pack.js'
             }
         },
         
@@ -69,7 +83,8 @@ module.exports = function(grunt) {
             },
             dist: {
               files: {
-                  '<%= pkg.dev.distDir %>/js/ajaxContactForm.min.js': ['<%= pkg.dev.distDir %>/js/ajaxContactForm.js']
+                  '<%= pkg.dev.distDir %>/js/ajaxContactForm.min.js': ['<%= pkg.dev.distDir %>/js/ajaxContactForm.js'],
+                  '<%= pkg.dev.distDir %>/js/ajaxContactForm.pack.min.js': ['<%= pkg.dev.distDir %>/js/ajaxContactForm.pack.js']
               }
             }
         },
@@ -77,7 +92,29 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [
-                    {src: ['<%= pkg.dev.devDir %>/css/ajaxContactForm.less'], dest: '<%= pkg.dev.distDir %>/css/ajaxContactForm.less'}
+                    {src: '<%= pkg.dev.devDir %>/css/ajaxContactForm.less', dest: '<%= pkg.dev.distDir %>/css/ajaxContactForm.less'},
+                    {
+                        src: '<%= pkg.dev.devDir %>/php/attachments/attachments_logs.txt', 
+                        dest: '<%= pkg.dev.distDir %>/php/attachments/attachments_logs.txt'
+                    },
+                    {
+                        src: '<%= pkg.dev.devDir %>/php/attachments/UploadHandler.php', 
+                        dest: '<%= pkg.dev.distDir %>/php/attachments/UploadHandler.php'
+                    },
+                    {
+                        src: '<%= pkg.dev.devDir %>/php/attachments/files/.htaccess', 
+                        dest: '<%= pkg.dev.distDir %>/php/attachments/files/.htaccess'
+                    },
+                    {
+                        src: '<%= pkg.dev.devDir %>/php/phpmailer/class.phpmailer.php', 
+                        dest: '<%= pkg.dev.distDir %>/php/phpmailer/class.phpmailer.php'
+                    },
+                    {
+                        expand: true, 
+                        cwd: '<%= pkg.dev.devDir %>/js/', 
+                        src: ['jquery.*'],
+                        dest: '<%= pkg.dev.distDir %>/js/jquery-upload/'
+                    }
                 ]
             }
         },
@@ -128,7 +165,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'clean:dist',
         'string-replace:dist',
-        'concat:dist',
+        'concat',
         'uglify:dist',
         'copy:dist',
         'less:dist',
