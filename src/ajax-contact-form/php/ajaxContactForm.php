@@ -2,21 +2,23 @@
 
 //{BANNER}
 
-require_once("config.php");
-require_once("phpmailer/class.phpmailer.php");
-$mail = new PHPMailer();
+date_default_timezone_set('Etc/UTC');
+
+require 'config.php';
+require 'phpmailer/PHPMailerAutoload.php';
 
 $attachmentsFilesDir = dirname(__FILE__).'/attachments/files';
-
-/* ************************************** */
-/* Get Input Values */
-/* ************************************** */
-
-$name = false;
-$surname = false;
-$email = false;
-$msg = false;
+$resultmsg = array();
+$name = "";
+$surname = "";
+$email = "";
+$msg = "";
 $attachments = false;
+
+
+/* ********************************************************************** */
+/* Get Input Values */
+/* ********************************************************************** */
 
 // Name
 if($_REQUEST['acf_name']) {
@@ -40,7 +42,7 @@ if($_REQUEST['acf_subject']) {
 }
 
 // Mail Message 
-if($_REQUEST['acf_email']) {
+if($_REQUEST['acf_message']) {
     $msg = trim(stripslashes ($_REQUEST['acf_message']));
 }
 
@@ -51,9 +53,11 @@ if($_REQUEST['acf_attachments']) {
 	$attachmentsFiles = explode(',', $attachmentsFiles);
 }
 
-/* Text Message */
-/* ====================== */
-$message .= "<div style=\"font-family: ".$text_font_family."; font-size:".$text_size."; color:".$text_color.";\">";
+/* ********************************************************************** */
+/* MESSAGE BODY SETUP */
+/* ********************************************************************** */
+
+$message = "<div style=\"font-family: ".$text_font_family."; font-size:".$text_size."; color:".$text_color.";\">";
 if ($messageImage != "") {
     $message .= "<img src=\"".$messageImage."\" alt=\"contact form image\"";
 }
@@ -67,33 +71,36 @@ $message .= "<p style=\"font-size:14px; color:#ccc;\"><em>Message sended by BRAI
 $message .= "</div>";
 
 
+/* ********************************************************************** */
+/* PHP MAILER MESSAGE SETUP */
+/* ********************************************************************** */
 
-/* ************************************** */
-/* MAILER */
-/* ************************************** */
-
-$mail->From = $email;
-$mail->FromName = $name;
-$mail->AddAddress($to);
-$mail->IsHTML(true);
-$mail->Subject = $subject;
-$mail->Body = $message;
+$mail = new PHPMailer;
 
 /* SMTP */
 /* ====================== */
-if ($smtp == true && $smtp_host != "" && $smtp_port != "") {
-    
-    $mail->IsSMTP();
+if ($smtp == true) {
+    $mail->isSMTP();
     $mail->Host = $smtp_host;
     $mail->Port = $smtp_port;
-    
-    if($smtp_auth == true && $smtp_username != "" && $smtp_password != "") {
-        $mail->SMTPAuth   = true; 
-        $mail->Username = $smtp_username;
-        $mail->Password = $smtp_password;
-    }
-    
+    $mail->SMTPAuth = $smtp_auth;
+    $mail->Username = $smtp_username;
+    $mail->Password = $smtp_password;
 }
+
+/* Mail Data */
+/* ====================== */
+
+$from = array();
+$from[0] = ($from_email != "") ? $from_email : $email ;
+$from[1] = ($from_name != "") ? $from_name : $name ;
+
+$mail->setFrom($from[0], $from[1]);
+$mail->addReplyTo($email, $name);
+$mail->addAddress($to);
+$mail->IsHTML(true);
+$mail->Subject = $subject;
+$mail->Body = $message;
 
 /* Attachments */
 /* ====================== */
@@ -103,14 +110,15 @@ if ($attachments == true) {
 	}
 }
 
-if($mail->Send()) {
-    $resultmsg['result'] = "success";
-}else{
+/* ********************************************************************** */
+/* send the message, check for errors */
+/* ********************************************************************** */
+if (!$mail->send()) {
     $resultmsg['result'] = "fail";
     $resultmsg['msg'] = $mail->ErrorInfo;
+} else {
+    $resultmsg['result'] = "success";
 }
 
 $json = json_encode($resultmsg);
 echo $json;
-
-?>

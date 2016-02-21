@@ -27,9 +27,9 @@ module.exports = function(grunt) {
                     '<%= pkg.dev.distDir %>/php/config.php':'<%= pkg.dev.devDir %>/php/config_dist.php',
                     '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_attachments.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_attachments.php',
                     '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_cleaner.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_cleaner.php',
-                    'dist/ajax-contact-form.html':'src/ajax-contact-form.html',
-                    'dist/ajax-contact-form.js':'src/ajax-contact-form_dist.js',
-                    'dist/ajax-contact-form.css':'src/ajax-contact-form.css'
+                    'dist/acf-demo.html':'src/acf-demo.html',
+                    'dist/acf-demo.js':'src/acf-demo_dist.js',
+                    'dist/acf-demo.css':'src/acf-demo.css'
                 },
                 options: {
                     replacements: [
@@ -106,14 +106,22 @@ module.exports = function(grunt) {
                         dest: '<%= pkg.dev.distDir %>/php/attachments/files/.htaccess'
                     },
                     {
-                        src: '<%= pkg.dev.devDir %>/php/phpmailer/class.phpmailer.php', 
-                        dest: '<%= pkg.dev.distDir %>/php/phpmailer/class.phpmailer.php'
+                        expand: true, 
+                        cwd: '<%= pkg.dev.devDir %>/php/phpmailer/', 
+                        src: ['*.php'],
+                        dest: '<%= pkg.dev.distDir %>/php/phpmailer/'
                     },
                     {
                         expand: true, 
                         cwd: '<%= pkg.dev.devDir %>/js/', 
                         src: ['jquery.*'],
                         dest: '<%= pkg.dev.distDir %>/js/jquery-upload/'
+                    },
+                    {
+                        expand: true, 
+                        cwd: '<%= pkg.dev.devDir %>/markup/', 
+                        src: ['*.html'],
+                        dest: '<%= pkg.dev.distDir %>/markup/'
                     }
                 ]
             }
@@ -145,7 +153,7 @@ module.exports = function(grunt) {
         processhtml: {
             dist: {
               files: {
-                  'dist/ajax-contact-form.html': ['dist/ajax-contact-form.html']
+                  'dist/acf-demo.html': ['dist/acf-demo.html']
               }
             }
         }

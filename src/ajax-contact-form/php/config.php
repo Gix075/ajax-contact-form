@@ -2,29 +2,32 @@
 
 //{BANNER}
 
-/* =============================================================== */
-/* CONFIGURATION */
-/* =============================================================== */
+/* ======================================================================== 
+
+    CONFIGURATION 
+    See the GitHub Wiki to learn more about configuration
+    https://github.com/Gix075/ajax-contact-form/wiki/Configuration 
+
+ ========================================================================= */
 
 /* Mail Configuration */
 /* ******************************* */
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
-$to = "gildo.giuliani@gmail.com"; // Your email inbox
+$to = "gildo.giuliani@gmail.com"; // Your email inbox (where message will be sent)
+$from_email = "progetti@fabbricamultimediale.it"; // Your sender email address
+$from_name = "Fabbrica Multimediale"; // Your sender name
 
 /* 
-    SMTP - phpmailer class support
-    (Optional)
+    -------------------------------------------------------------------------------------------
+    Note:
+        "$from_email" and "$from_name" are optional, but
+        without this parameters your message can be handled 
+        as spam from your client.
+        Use the real email address that will used to send the message from your server!
+        Remember that the email message will have the user email address as reply address.
+    -------------------------------------------------------------------------------------------    
 */
-/* ******************************* */
-
-$smtp = false;
-$smtp_auth = true; // enable/disable smtp authentication
-$smtp_host = ""; // your smtp server url (example: mail.yourdomain.com)
-$smtp_port = 26; // GMAIL
-$smtp_username = ""; // smtp username
-$smtp_password = ""; // smtp password
-
 
 /* Message Configuration */
 /* ******************************* */
@@ -48,7 +51,23 @@ $subtitle_color = "#555"; // subtitle color
 
 /* Google ReCaptcha */
 /* ******************************* */
-$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
+//$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
+$secretKey = "6Lfu3BcTAAAAAKStxe37-NM50Wp42AKll1KmH2t9";
 $googleServer = "https://www.google.com/recaptcha/api/siteverify";
+
+
+
+/* SMTP Configuration (Optional) */
+/* ******************************* */
+
+// The followinf options will be used to send mail message via SMTP
+// To use this feature you need a valid SMTP server url with valid username and passwords
+
+$smtp = true; // enable/disable smtp support
+$smtp_auth = true; // enable/disable smtp authentication
+$smtp_host = "mail.fabbricamultimediale.it"; // your smtp server url (example: mail.yourdomain.com)
+$smtp_port = 25; // Your smtp port
+$smtp_username = "progetti@fabbricamultimediale.it"; // smtp username
+$smtp_password = "7L7f7WAc"; // smtp password
 
 ?>

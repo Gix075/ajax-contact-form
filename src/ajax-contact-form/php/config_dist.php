@@ -2,16 +2,32 @@
 
 //{BANNER}
 
-/* =============================================================== */
-/* CONFIGURATION */
-/* =============================================================== */
+/* ======================================================================== 
+
+    CONFIGURATION 
+    See the GitHub Wiki to learn more about configuration
+    https://github.com/Gix075/ajax-contact-form/wiki/Configuration 
+
+ ========================================================================= */
 
 /* Mail Configuration */
 /* ******************************* */
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
 $to = ""; // Your email inbox
+$from_email = ""; // Your sender email address
+$from_name = ""; // Your sender name
 
+/* 
+    -------------------------------------------------------------------------------------------
+    Note:
+        "$from_email" and "$from_name" are optional, but
+        without this parameters your message can be handled 
+        as spam from your client.
+        Use the real email address that will used to send the message from your server!
+        Remember that the email message will have the user email address as reply address.
+    -------------------------------------------------------------------------------------------    
+*/
 
 /* Message Configuration */
 /* ******************************* */
@@ -38,4 +54,17 @@ $subtitle_color = "#555"; // subtitle color
 $secretKey = "yourlongsecretkeyhere";
 $googleServer = "https://www.google.com/recaptcha/api/siteverify";
 
+
+/* SMTP Configuration (Optional) */
+/* ******************************* */
+
+// The followinf options will be used to send mail message via SMTP
+// To use this feature you need a valid SMTP server url with valid username and passwords
+
+$smtp = false; // enable/disable smtp support
+$smtp_auth = true; // enable/disable smtp authentication
+$smtp_host = ""; // your smtp server url (example: mail.yourdomain.com)
+$smtp_port = 25; // Your smtp port
+$smtp_username = ""; // smtp username
+$smtp_password = ""; // smtp password
 ?>

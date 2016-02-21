@@ -1,7 +1,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.6.1 - Date: 21/02/2016 
+ *  Version 1.7.1 - Date: 21/02/2016 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -428,6 +428,7 @@ function ajaxContactForm(opts) {
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error > .msg-error-info').text(data.msg);
                             $(plugin.settings.form).find('.acf_messagebox > .msg-success').hide();
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error').show();
+                            console.log('%c AjaxContactForm: MAIL_ERROR ','background:red;color:#fff;');
                             break;
                     }
                       

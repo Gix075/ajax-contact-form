@@ -130,6 +130,7 @@ function ajaxContactForm(opts) {
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error > .msg-error-info').text(data.msg);
                             $(plugin.settings.form).find('.acf_messagebox > .msg-success').hide();
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error').show();
+                            console.log('%c AjaxContactForm: MAIL_ERROR ','background:red;color:#fff;');
                             break;
                     }
                       
