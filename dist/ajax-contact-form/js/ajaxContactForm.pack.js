@@ -1,7 +1,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.5.0 - Date: 27/01/2016 
+ *  Version 1.6.1 - Date: 21/02/2016 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -2663,7 +2663,7 @@ function ajaxContactForm(opts) {
                 maxFileSize: 20971520,
                 maxTotalSize: 20971520,
                 maxFiles: 10,
-                cleanAfterMinutes: 20
+                cleanAfterMinutes: 15
             },
             messages: {
                 attachments: {

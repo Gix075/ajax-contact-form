@@ -1,13 +1,6 @@
 <?php
 
-/*! 
- * ************************************************************************* 
- *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.6.1 - Date: 21/02/2016 
- *  HomePage: https://github.com/Gix075/ajax-contact-form 
- * ************************************************************************* 
-*/ 
-
+//{BANNER}
 
 /* =============================================================== */
 /* CONFIGURATION */
@@ -17,7 +10,20 @@
 /* ******************************* */
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
-$to = ""; // Your email inbox
+$to = "gildo.giuliani@gmail.com"; // Your email inbox
+
+/* 
+    SMTP - phpmailer class support
+    (Optional)
+*/
+/* ******************************* */
+
+$smtp = false;
+$smtp_auth = true; // enable/disable smtp authentication
+$smtp_host = ""; // your smtp server url (example: mail.yourdomain.com)
+$smtp_port = 26; // GMAIL
+$smtp_username = ""; // smtp username
+$smtp_password = ""; // smtp password
 
 
 /* Message Configuration */
@@ -42,7 +48,7 @@ $subtitle_color = "#555"; // subtitle color
 
 /* Google ReCaptcha */
 /* ******************************* */
-$secretKey = "yourlongsecretkeyhere";
+$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
 $googleServer = "https://www.google.com/recaptcha/api/siteverify";
 
 ?>

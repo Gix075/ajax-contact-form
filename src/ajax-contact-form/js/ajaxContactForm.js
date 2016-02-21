@@ -19,7 +19,7 @@ function ajaxContactForm(opts) {
                 maxFileSize: 20971520,
                 maxTotalSize: 20971520,
                 maxFiles: 10,
-                cleanAfterMinutes: 20
+                cleanAfterMinutes: 15
             },
             messages: {
                 attachments: {

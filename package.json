@@ -1,7 +1,7 @@
 {
   "name": "ajax-contact-form",
   "title": "AjaxContactForm",
-  "version": "1.5.0",
+  "version": "1.6.1",
   "description": "Simple ajax contact form",
   "main": "Gruntfile.js",
   "scripts": {

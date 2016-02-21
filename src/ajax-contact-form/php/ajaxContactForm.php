@@ -67,7 +67,10 @@ $message .= "<p style=\"font-size:14px; color:#ccc;\"><em>Message sended by BRAI
 $message .= "</div>";
 
 
+
+/* ************************************** */
 /* MAILER */
+/* ************************************** */
 
 $mail->From = $email;
 $mail->FromName = $name;
@@ -75,6 +78,22 @@ $mail->AddAddress($to);
 $mail->IsHTML(true);
 $mail->Subject = $subject;
 $mail->Body = $message;
+
+/* SMTP */
+/* ====================== */
+if ($smtp == true && $smtp_host != "" && $smtp_port != "") {
+    
+    $mail->IsSMTP();
+    $mail->Host = $smtp_host;
+    $mail->Port = $smtp_port;
+    
+    if($smtp_auth == true && $smtp_username != "" && $smtp_password != "") {
+        $mail->SMTPAuth   = true; 
+        $mail->Username = $smtp_username;
+        $mail->Password = $smtp_password;
+    }
+    
+}
 
 /* Attachments */
 /* ====================== */

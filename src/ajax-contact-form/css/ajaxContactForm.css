@@ -175,7 +175,7 @@
   font-weight: bold;
 }
 .acf_form .error {
-  border-color: red;
+  border-color: #a94442;
 }
 /* Spinner */
 /* ************************** */
