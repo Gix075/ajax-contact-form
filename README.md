@@ -1,4 +1,4 @@
-# Ajax Contact Form (v.1.7.1)
+# Ajax Contact Form (v.1.7.2)
 
 An easy to use and hightly customizable Ajax Contact Form, including inputs validation and Google ReCaptcha.
 
@@ -17,9 +17,13 @@ Read the [documentation wiki](https://github.com/Gix075/ajax-contact-form/wiki) 
 
 ## History
 
-#### Version 1.7.1
+#### Version 1.7.2
 
 (upgrade to this version is highly recommended)
+
+* security bug fixed
+
+#### Version 1.7.1
 
 * "markup" folder (with form html markup example) added to ajaxContactForm
 * ajax-contact-form.css renamed in acf-demo.css

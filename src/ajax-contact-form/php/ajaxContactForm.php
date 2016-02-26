@@ -53,6 +53,12 @@ if($_REQUEST['acf_attachments']) {
 	$attachmentsFiles = explode(',', $attachmentsFiles);
 }
 
+if ($name == "" || $email == "" || $msg == "") {
+    $resultmsg['result'] = "fail";
+    $resultmsg['msg'] = "Name, Email and Message fields are required!";
+    return $resultmsg;
+}
+
 /* ********************************************************************** */
 /* MESSAGE BODY SETUP */
 /* ********************************************************************** */

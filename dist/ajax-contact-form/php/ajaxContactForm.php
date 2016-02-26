@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.1 - Date: 21/02/2016 
+ *  Version 1.7.2 - Date: 27/02/2016 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -58,6 +58,12 @@ if($_REQUEST['acf_attachments']) {
 	$attachments = true;
 	$attachmentsFiles = $_REQUEST['acf_attachments'];
 	$attachmentsFiles = explode(',', $attachmentsFiles);
+}
+
+if ($name == "" || $email == "" || $msg == "") {
+    $resultmsg['result'] = "fail";
+    $resultmsg['msg'] = "Name, Email and Message fields are required!";
+    return $resultmsg;
 }
 
 /* ********************************************************************** */
