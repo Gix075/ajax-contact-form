@@ -1,4 +1,4 @@
-# Ajax Contact Form (v.1.7.2)
+# Ajax Contact Form (v.1.7.3)
 
 An easy to use and hightly customizable Ajax Contact Form, including inputs validation and Google ReCaptcha.
 
