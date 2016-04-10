@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.2 - Date: 27/02/2016 
+ *  Version 1.7.2 - Date: 10/04/2016 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -108,6 +108,7 @@ $from = array();
 $from[0] = ($from_email != "") ? $from_email : $email ;
 $from[1] = ($from_name != "") ? $from_name : $name ;
 
+$mail->CharSet = 'UTF-8';
 $mail->setFrom($from[0], $from[1]);
 $mail->addReplyTo($email, $name);
 $mail->addAddress($to);

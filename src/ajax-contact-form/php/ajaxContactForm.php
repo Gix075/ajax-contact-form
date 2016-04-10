@@ -101,6 +101,7 @@ $from = array();
 $from[0] = ($from_email != "") ? $from_email : $email ;
 $from[1] = ($from_name != "") ? $from_name : $name ;
 
+$mail->CharSet = 'UTF-8';
 $mail->setFrom($from[0], $from[1]);
 $mail->addReplyTo($email, $name);
 $mail->addAddress($to);

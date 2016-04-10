@@ -17,6 +17,9 @@ Read the [documentation wiki](https://github.com/Gix075/ajax-contact-form/wiki) 
 
 ## History
 
+#### Version 1.7.3
+* utf-8 encoding added
+
 #### Version 1.7.2
 
 (upgrade to this version is highly recommended)

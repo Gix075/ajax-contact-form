@@ -51,8 +51,8 @@ $subtitle_color = "#555"; // subtitle color
 
 /* Google ReCaptcha */
 /* ******************************* */
-//$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
-$secretKey = "6Lfu3BcTAAAAAKStxe37-NM50Wp42AKll1KmH2t9";
+$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
+//$secretKey = "6Lfu3BcTAAAAAKStxe37-NM50Wp42AKll1KmH2t9";
 $googleServer = "https://www.google.com/recaptcha/api/siteverify";
 
 
@@ -63,7 +63,7 @@ $googleServer = "https://www.google.com/recaptcha/api/siteverify";
 // The followinf options will be used to send mail message via SMTP
 // To use this feature you need a valid SMTP server url with valid username and passwords
 
-$smtp = true; // enable/disable smtp support
+$smtp = false; // enable/disable smtp support
 $smtp_auth = true; // enable/disable smtp authentication
 $smtp_host = "mail.fabbricamultimediale.it"; // your smtp server url (example: mail.yourdomain.com)
 $smtp_port = 25; // Your smtp port

@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.2 - Date: 27/02/2016 
+ *  Version 1.7.2 - Date: 10/04/2016 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
