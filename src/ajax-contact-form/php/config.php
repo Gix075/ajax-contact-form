@@ -14,9 +14,9 @@
 /* ******************************* */
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
-$to = "gildo.giuliani@gmail.com"; // Your email inbox (where message will be sent)
-$from_email = "progetti@fabbricamultimediale.it"; // Your sender email address
-$from_name = "Fabbrica Multimediale"; // Your sender name
+$to = "gildo@fattoriacreativa.it"; // Your email inbox (where message will be sent)
+$from_email = "gildo.giuliani@gmail.com"; // Your sender email address
+$from_name = "Gildo Giuliani"; // Your sender name
 
 /* 
     -------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ $subtitle_color = "#555"; // subtitle color
 
 /* Google ReCaptcha */
 /* ******************************* */
-$secretKey = "6LeIdAUTAAAAAKU09Brv4pIfNnPZvxVE9L918IOS";
+$secretKey = "6Le8mBsTAAAAAHYNMlcqwquPtOQIl25wTAd_3P74";
 //$secretKey = "6Lfu3BcTAAAAAKStxe37-NM50Wp42AKll1KmH2t9";
 $googleServer = "https://www.google.com/recaptcha/api/siteverify";
 

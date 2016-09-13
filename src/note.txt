@@ -1,0 +1,12 @@
+###########################################################################
+DEV NOTES
+###########################################################################
+
+# Version 1.7.4
+---------------------------------------------------------
+- Filenames sanitize added for attachments 
+    on UploadHandler.php (from line 514 tp 542) 
+        - updated function trim_file_name()
+        - 2 functions added
+- Not exported jet ... must be tested
+

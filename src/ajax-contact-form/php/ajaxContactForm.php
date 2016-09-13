@@ -51,6 +51,17 @@ if($_REQUEST['acf_attachments']) {
 	$attachments = true;
 	$attachmentsFiles = $_REQUEST['acf_attachments'];
 	$attachmentsFiles = explode(',', $attachmentsFiles);
+    //$attachmentsFiles = array();
+    
+    /* Filenames sanitize
+    for($i=0; $i<count($attachmentsFiles); $i++) {
+        $file = $attachmentsFiles[$i];
+        $file = strtolower($file);
+        $file = preg_replace('/[^a-z0-9 -]+/', '', $file);
+        $file = str_replace(' ', '-', $file);
+        $attachmentsFiles[$i] = $file;
+    }
+    */
 }
 
 if ($name == "" || $email == "" || $msg == "") {
