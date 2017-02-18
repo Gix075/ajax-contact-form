@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.2 - Date: 10/04/2016 
+ *  Version 1.7.2 - Date: 18/02/2017 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -58,6 +58,17 @@ if($_REQUEST['acf_attachments']) {
 	$attachments = true;
 	$attachmentsFiles = $_REQUEST['acf_attachments'];
 	$attachmentsFiles = explode(',', $attachmentsFiles);
+    //$attachmentsFiles = array();
+    
+    /* Filenames sanitize
+    for($i=0; $i<count($attachmentsFiles); $i++) {
+        $file = $attachmentsFiles[$i];
+        $file = strtolower($file);
+        $file = preg_replace('/[^a-z0-9 -]+/', '', $file);
+        $file = str_replace(' ', '-', $file);
+        $attachmentsFiles[$i] = $file;
+    }
+    */
 }
 
 if ($name == "" || $email == "" || $msg == "") {

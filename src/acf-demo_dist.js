@@ -12,13 +12,13 @@
 // AjaxContactForm Parameters
 // ================================
 var opts = {
-    form: "#ajaxContactForm",
-    formBtn: "#ajaxContactFormBtn",
-    ws: 'ajax-contact-form/php/ajaxContactForm.php',
-    showMsg: true,
+    form: "#ajaxContactForm", // Form ID
+    formBtn: "#ajaxContactFormBtn", // Form submit button ID
+    ws: 'ajax-contact-form/php/ajaxContactForm.php', // Webservice URL (relative to the form page)
+    showMsg: true, // Enable/Disable error messages
     recaptcha: {
-        pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey",
-        element: "ajaxContactForm_recaptcha",
+        pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey", // Google ReCaptcha public key
+        element: "ajaxContactForm_recaptcha", // Google ReCaptcha element in your page
         theme: "light",
         ws: 'ajax-contact-form/php/ajaxContactForm_recaptcha.php'
     },

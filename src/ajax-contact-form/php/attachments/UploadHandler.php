@@ -522,7 +522,6 @@ class UploadHandler
             $name = str_replace('.', '-', microtime(true));
         }
         // Gix075 function
-        //$name = $this->sanitize_file_name__custom($name);
         $name = $this->clean_file_name__custom($name);
         return $name;
     }
@@ -543,6 +542,7 @@ class UploadHandler
         $basename = strtolower($basename);
         return $pathinfo['dirname']."/".$basename.".".$pathinfo['extension'];
     }
+    
     // Gix075 function
     /*protected function sanitize_file_name__custom($filename) {
         $dangerous_characters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
