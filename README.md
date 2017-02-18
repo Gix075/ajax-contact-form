@@ -1,4 +1,4 @@
-# Ajax Contact Form (v.1.7.4)
+# Ajax Contact Form (v.1.7.5)
 
 An easy to use and hightly customizable Ajax Contact Form, including inputs validation and Google ReCaptcha.
 
@@ -17,13 +17,19 @@ Read the [documentation wiki](https://github.com/Gix075/ajax-contact-form/wiki) 
 
 ## History
 
+#### Version 1.7.5 (security update)
+
+(upgrade to this version is highly recommended)
+
+* PHPMailer Class updated to version 5.2.22
+
 #### Version 1.7.4
 * filename sanitize on upload attachments
 
 #### Version 1.7.3
 * utf-8 encoding added
 
-#### Version 1.7.2
+#### Version 1.7.2 (security update)
 
 (upgrade to this version is highly recommended)
 
