@@ -53,5 +53,3 @@ var opts = {
 $(window).on('load', function() {
     new ajaxContactForm(opts).init();        
 });
-
-

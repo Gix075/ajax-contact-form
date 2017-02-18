@@ -32,7 +32,7 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-src/php/config.php
+src/ajax-contact-form/php/config.php
 src/acf-demo.js
 src/ajax-contact-form/php/smtp_test.php
 src/ajax-contact-form/js/jquery.ajaxcontactform.js

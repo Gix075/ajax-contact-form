@@ -522,24 +522,32 @@ class UploadHandler
             $name = str_replace('.', '-', microtime(true));
         }
         // Gix075 function
-        $name = $this->sanitize_file_name__custom($name);
+        //$name = $this->sanitize_file_name__custom($name);
         $name = $this->clean_file_name__custom($name);
         return $name;
     }
     
     // Gix075 function
     protected function clean_file_name__custom($filename) {
-        $filename = htmlentities($filename, ENT_QUOTES, 'UTF-8');
-        $filename = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $filename);
-        $filename = html_entity_decode($filename, ENT_QUOTES, 'UTF-8');
-        $filename = preg_replace(array('~[^0-9a-z]~i', '~[ -]+~'), ' ', $filename);
-        return trim($filename, ' -');
+        
+        $dangerous_characters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
+        
+        $pathinfo = pathinfo($filename);
+        $basename = basename($filename,$pathinfo['extension']);
+        $basename = htmlentities($basename, ENT_QUOTES, 'UTF-8');
+        $basename = preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $basename);
+        $basename = html_entity_decode($basename, ENT_QUOTES, 'UTF-8');
+        $basename = preg_replace(array('~[^0-9a-z]~i', '~[ -]+~'), ' ', $basename);
+        $basename = trim($basename, ' -');
+        $basename = str_replace($dangerous_characters, '_', $basename);
+        $basename = strtolower($basename);
+        return $pathinfo['dirname']."/".$basename.".".$pathinfo['extension'];
     }
     // Gix075 function
-    protected function sanitize_file_name__custom($filename) {
+    /*protected function sanitize_file_name__custom($filename) {
         $dangerous_characters = array(" ", '"', "'", "&", "/", "\\", "?", "#");
         return str_replace($dangerous_characters, '_', $filename);
-    }
+    }*/
 
     protected function get_file_name($file_path, $name, $size, $type, $error,
             $index, $content_range) {
