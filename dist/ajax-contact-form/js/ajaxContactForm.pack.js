@@ -1,7 +1,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.5 - Date: 18/02/2017 
+ *  Version 1.8.0 - Date: 24/02/2017 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -2650,6 +2650,8 @@ function ajaxContactForm(opts) {
             formBtn: "#ajaxContactFormBtn",
             ws: 'ajax-contact-form/php/ajaxContactForm.php',
             showMsg: true,
+            onSuccess: null,
+            onError: null,
             recaptcha: {
                 pubKey: "",
                 element: "ajaxContactForm_recaptcha",
@@ -2736,7 +2738,7 @@ function ajaxContactForm(opts) {
         {
             success:function(){
                 console.log('%c AjaxContactForm: validation success! ','background:#333;color:#fff;');
-                $(plugin.settings.form).find('.acf_messagebox').height($(plugin.settings.form).height());
+                //$(plugin.settings.form).find('.acf_messagebox').height($(plugin.settings.form).height());
                 plugin.spinnerPlay();
                 
                 // Recaptcha Validation
@@ -2769,12 +2771,14 @@ function ajaxContactForm(opts) {
                         case "success": 
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error').hide();
                             $(plugin.settings.form).find('.acf_messagebox > .msg-success').show();
+                            if(plugin.settings.onSuccess !== null) plugin.settings.onSuccess();
                             break;
                         case "fail":
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error > .msg-error-info').text(data.msg);
                             $(plugin.settings.form).find('.acf_messagebox > .msg-success').hide();
                             $(plugin.settings.form).find('.acf_messagebox > .msg-error').show();
                             console.log('%c AjaxContactForm: MAIL_ERROR ','background:red;color:#fff;');
+                            if(plugin.settings.onError !== null) plugin.settings.onError();
                             break;
                     }
                       

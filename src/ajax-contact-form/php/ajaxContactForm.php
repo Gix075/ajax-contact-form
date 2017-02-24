@@ -51,17 +51,6 @@ if($_REQUEST['acf_attachments']) {
 	$attachments = true;
 	$attachmentsFiles = $_REQUEST['acf_attachments'];
 	$attachmentsFiles = explode(',', $attachmentsFiles);
-    //$attachmentsFiles = array();
-    
-    /* Filenames sanitize
-    for($i=0; $i<count($attachmentsFiles); $i++) {
-        $file = $attachmentsFiles[$i];
-        $file = strtolower($file);
-        $file = preg_replace('/[^a-z0-9 -]+/', '', $file);
-        $file = str_replace(' ', '-', $file);
-        $attachmentsFiles[$i] = $file;
-    }
-    */
 }
 
 if ($name == "" || $email == "" || $msg == "") {
@@ -74,7 +63,9 @@ if ($name == "" || $email == "" || $msg == "") {
 /* MESSAGE BODY SETUP */
 /* ********************************************************************** */
 
+
 $message = "<div style=\"font-family: ".$text_font_family."; font-size:".$text_size."; color:".$text_color.";\">";
+
 if ($messageImage != "") {
     $message .= "<img src=\"".$messageImage."\" alt=\"contact form image\"";
 }
@@ -116,6 +107,27 @@ $mail->CharSet = 'UTF-8';
 $mail->setFrom($from[0], $from[1]);
 $mail->addReplyTo($email, $name);
 $mail->addAddress($to);
+
+/* CC */
+/* ====================== */
+if ($cc != "") {
+    $cc_array = array();
+    $cc_array = explode(",", $cc);
+    foreach ($cc_array as $cc_address) {
+        $mail->AddCC($cc_address);
+    }
+}
+
+//* BCC */
+/* ====================== */
+if ($bcc != "") {
+    $bcc_array = array();
+    $bcc_array = explode(",", $bcc);
+    foreach ($bcc_array as $bcc_address) {
+        $mail->AddBCC($bcc_address);
+    }
+}
+
 $mail->IsHTML(true);
 $mail->Subject = $subject;
 $mail->Body = $message;

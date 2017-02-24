@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.5 - Date: 18/02/2017 
+ *  Version 1.8.0 - Date: 24/02/2017 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -22,6 +22,8 @@
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
 $to = ""; // Your email inbox
+$cc = ""; // Add one or more email addresses (comma separated) as CC.
+$bcc = ""; // Add one or more email addresses (comma separated) as BCC.
 $from_email = ""; // Your sender email address
 $from_name = ""; // Your sender name
 

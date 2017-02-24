@@ -16,6 +16,12 @@ var opts = {
     formBtn: "#ajaxContactFormBtn", // Form submit button ID
     ws: 'ajax-contact-form/php/ajaxContactForm.php', // Webservice URL (relative to the form page)
     showMsg: true, // Enable/Disable error messages
+    onSuccess: function() {
+        console.log('ON SUCCESS');
+    },
+    onError: function() {
+        console.log('ON ERROR');
+    },
     recaptcha: {
         pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey", // Google ReCaptcha public key
         element: "ajaxContactForm_recaptcha", // Google ReCaptcha element in your page

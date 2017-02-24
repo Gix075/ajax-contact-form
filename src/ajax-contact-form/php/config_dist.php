@@ -15,6 +15,8 @@
 
 $subject = "Mail from your site: "; // This is the prefix of the message subject
 $to = ""; // Your email inbox
+$cc = ""; // Add one or more email addresses (comma separated) as CC.
+$bcc = ""; // Add one or more email addresses (comma separated) as BCC.
 $from_email = ""; // Your sender email address
 $from_name = ""; // Your sender name
 

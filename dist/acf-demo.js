@@ -1,7 +1,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.7.5 - Date: 18/02/2017 
+ *  Version 1.8.0 - Date: 24/02/2017 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -23,6 +23,12 @@ var opts = {
     formBtn: "#ajaxContactFormBtn", // Form submit button ID
     ws: 'ajax-contact-form/php/ajaxContactForm.php', // Webservice URL (relative to the form page)
     showMsg: true, // Enable/Disable error messages
+    onSuccess: function() {
+        console.log('ON SUCCESS');
+    },
+    onError: function() {
+        console.log('ON ERROR');
+    },
     recaptcha: {
         pubKey: "YouRGooGLEreCapTcHAapIKeyPublicKey", // Google ReCaptcha public key
         element: "ajaxContactForm_recaptcha", // Google ReCaptcha element in your page

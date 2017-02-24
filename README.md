@@ -17,6 +17,13 @@ Read the [documentation wiki](https://github.com/Gix075/ajax-contact-form/wiki) 
 
 ## History
 
+#### Version 1.8.0
+
+* Now BCC and CC adress are supported
+* Javascript mail message callback functions (onSuccess and onError) added.
+* Result Message modal resize fixed
+
+
 #### Version 1.7.5 (security update)
 
 (upgrade to this version is highly recommended)
