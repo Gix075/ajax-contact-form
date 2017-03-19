@@ -6,8 +6,8 @@ date_default_timezone_set('Etc/UTC');
 
 require 'config.php';
 require 'phpmailer/PHPMailerAutoload.php';
-
 $attachmentsFilesDir = dirname(__FILE__).'/attachments/files';
+$backupsFilesDir = dirname(__FILE__).'/backups/files';
 $resultmsg = array();
 $name = "";
 $surname = "";
@@ -78,6 +78,17 @@ $message .= "<div style=\"margin:10px 0 0 0;\">".$msg."</div>";
 $message .= "<p style=\"font-size:14px; color:#ccc;\"><em>Message sended by BRAINLEAF contactForm&trade;</em></p>";
 $message .= "</div>";
 
+
+/* ********************************************************************** */
+/* MESSAGE BACKUP */
+/* ********************************************************************** */
+
+if ($backup_system_active == TRUE) {
+    require_once 'backups/ajaxContactForm_backup.php';
+    //$backupsFilesDir
+    $backupAttachmentsFiles = ($attachments == TRUE) ? $attachmentsFiles : FALSE;
+    $backup = new MessageBackup($backupsFilesDir,$name,$email,1,$subject,$msg,$attachmentsFilesDir,$backupAttachmentsFiles);
+}
 
 /* ********************************************************************** */
 /* PHP MAILER MESSAGE SETUP */

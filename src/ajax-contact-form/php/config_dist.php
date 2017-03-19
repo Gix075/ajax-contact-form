@@ -69,4 +69,8 @@ $smtp_host = ""; // your smtp server url (example: mail.yourdomain.com)
 $smtp_port = 25; // Your smtp port
 $smtp_username = ""; // smtp username
 $smtp_password = ""; // smtp password
-?>
+
+/* Mail Messages Backup */
+/* ******************************* */
+$backup_system_active = true;
+
