@@ -1,4 +1,4 @@
-# Ajax Contact Form (v.1.8.0)
+# Ajax Contact Form (v.1.9.0)
 
 An easy to use and hightly customizable Ajax Contact Form, including inputs validation and Google ReCaptcha.
 
@@ -16,6 +16,9 @@ An easy to use and hightly customizable Ajax Contact Form, including inputs vali
 Read the [documentation wiki](https://github.com/Gix075/ajax-contact-form/wiki) to learn *Ajax Contact Form* usage.
 
 ## History
+
+#### Version 1.9.0
+* Now Google ReCaptcha can be disabled with a new configuration parameter.
 
 #### Version 1.8.0
 

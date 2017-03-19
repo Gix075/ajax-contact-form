@@ -9,6 +9,7 @@ function ajaxContactForm(opts) {
             onSuccess: null,
             onError: null,
             recaptcha: {
+                disabled: false,
                 pubKey: "",
                 element: "ajaxContactForm_recaptcha",
                 theme: "light",
@@ -39,7 +40,7 @@ function ajaxContactForm(opts) {
             },
             debug: true
         },
-        plugin= this;
+        plugin = this;
     
     // Settings
     this.settings = $.extend(true, defaultOptions, opts );
@@ -65,7 +66,9 @@ function ajaxContactForm(opts) {
     
     // Init
     this.init = function() {
-        this.recaptcha.getCaptcha(this.settings.recaptcha.element);
+        if (plugin.settings.recaptcha.disabled === false) {
+            this.recaptcha.getCaptcha(this.settings.recaptcha.element);
+        }
         this.validateContactForm();
         
         // Attachments
@@ -98,7 +101,11 @@ function ajaxContactForm(opts) {
                 plugin.spinnerPlay();
                 
                 // Recaptcha Validation
-                plugin.recaptcha.validateCaptcha(plugin.settings.recaptcha.element);
+                if (plugin.settings.recaptcha.disabled === false) {
+                    plugin.recaptcha.validateCaptcha(plugin.settings.recaptcha.element);    
+                } else {
+                    plugin.sendMessage();
+                }
                 
             },
             fail:function(){
