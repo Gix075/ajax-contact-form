@@ -44,6 +44,7 @@
         public function writeLog($message) {
             $log_date = $this->json->date;
             $log_message = $log_date." : ".$this->filename." : ".$message.PHP_EOL;
+            if (!file_exists("backups/logs")) mkdir("backups/logs",0755);
             file_put_contents("backups/logs/backups_logs.txt", $log_message,FILE_APPEND);
         }
         
