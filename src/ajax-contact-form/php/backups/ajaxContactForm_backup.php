@@ -65,11 +65,12 @@
                 if(!file_put_contents($this->directory."/".$this->filename, $data)) {
                     return FALSE;
                 }
+                /*
                 if ($this->json->attachments != FALSE && is_array($this->json->attachments)) {
                     if ($this->saveAttachments() == FALSE) {
                         return FALSE;
                     }
-                }
+                }*/
                 return TRUE;
             }else{
                 return FALSE;
