@@ -87,7 +87,7 @@ if ($backup_system_active == TRUE) {
     require_once 'backups/ajaxContactForm_backup.php';
     //$backupsFilesDir
     $backupAttachmentsFiles = ($attachments == TRUE) ? $attachmentsFiles : FALSE;
-    $backup = new MessageBackup($backup_encrypt_key,$backup_encrypt_iv,$backupsFilesDir,$name,$email,1,$subject,$msg,$attachmentsFilesDir,$backupAttachmentsFiles);
+    $backup = new MessageBackup($backup_encrypt_key,$backup_encrypt_iv,$backup_zip_password,$backupsFilesDir,$name,$email,1,$subject,$msg,$attachmentsFilesDir,$backupAttachmentsFiles);
 }
 
 /* ********************************************************************** */

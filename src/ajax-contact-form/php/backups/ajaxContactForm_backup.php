@@ -10,7 +10,7 @@
      
     class MessageBackup  {
         
-        function __construct($encryptKey,$encryptIv,$backupDir,$senderName,$senderEmail,$privacy,$messageSubject,$messageBody,$attachmentsFilesDir,$attachmentsFiles) {
+        function __construct($encryptKey,$encryptIv,$zipPassword,$backupDir,$senderName,$senderEmail,$privacy,$messageSubject,$messageBody,$attachmentsFilesDir,$attachmentsFiles) {
             
             $this->backupDir = $backupDir;
             $this->originAttachmentsDir = $attachmentsFilesDir;
@@ -37,6 +37,9 @@
             // Encrypt/Decrypt
             $this->encrypt_key = $encryptKey;
             $this->encrypt_iv = $encryptIv;
+            
+            // Zip Password
+            $this->zip_pass = $zipPassword;
             
             // Save Message
             $saveMessage = $this->saveMessage();
@@ -82,11 +85,22 @@
                     $errors = $errors + 1;
                 }
             }
+            
+            //$this->zipAttachments();
+            
             if ($errors > 0) {
                 return FALSE;
             }else{
                 return TRUE;
             }
+        }
+        
+        private function zipAttachments() {
+            //$attachments_log = $this->json->date." - ".$this->filename;
+            //$log_file = $this->directory."/attachments.log";
+            $zip_file = $this->directory.'/'.$this->filename.'_attachments.zip';
+            //file_put_contents($log_file, $attachments_log);
+            system('zip -P'.$this->zip_pass.' -r '.$zip_file.' '.$this->directory_attachments);
         }
         
         private function makeFileNames() {

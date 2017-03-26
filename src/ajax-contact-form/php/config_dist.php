@@ -70,7 +70,16 @@ $smtp_port = 25; // Your smtp port
 $smtp_username = ""; // smtp username
 $smtp_password = ""; // smtp password
 
-/* Mail Messages Backup */
+/* Backup System (Optional) */
 /* ******************************* */
+
+// Backup system provides a copy for each message that will be sent by users.
+// If backup system is enabled the form will save a json encrypted copy of the mail message and a zip (password protected) pack with all attachments.
+// Remember that backup files will be public. Use at you own risk!
+
 $backup_system_active = true;
+$backup_encrypt_key = "123456789"; // THIS VALUE MUST BE CHANGED!
+$backup_encrypt_iv = "987654321"; // THIS VALUE MUST BE CHANGED!
+$backup_attachments = true;
+$backup_zip_password = "zipPassword123456"; // THIS VALUE MUST BE CHANGED!
 
