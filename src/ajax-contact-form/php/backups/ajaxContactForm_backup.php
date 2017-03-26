@@ -95,6 +95,7 @@
             }
         }
         
+        /*
         private function zipAttachments() {
             //$attachments_log = $this->json->date." - ".$this->filename;
             //$log_file = $this->directory."/attachments.log";
@@ -111,7 +112,7 @@
                 $zip->addGlob('*', GLOB_BRACE, $options);
                 $zip->close();
             }
-        }
+        }*/
         
         private function makeFileNames() {
             $return = new stdClass();
