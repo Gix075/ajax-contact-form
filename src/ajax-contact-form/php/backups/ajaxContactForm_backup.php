@@ -100,7 +100,17 @@
             //$log_file = $this->directory."/attachments.log";
             $zip_file = $this->directory.'/'.$this->filename.'_attachments.zip';
             //file_put_contents($log_file, $attachments_log);
-            system('zip -P'.$this->zip_pass.' -r '.$zip_file.' '.$this->directory_attachments);
+            //system('zip -P'.$this->zip_pass.' -r '.$zip_file.' '.$this->directory_attachments);
+            
+            $zip = new ZipArchive();
+            $ret = $zip->open($zip_file, ZipArchive::CREATE);
+            if ($ret !== TRUE) {
+                //printf('Failed with code %d', $ret);
+            } else {
+                $options = array('add_path' => $this->directory_attachments.'/', 'remove_all_path' => TRUE);
+                $zip->addGlob('*', GLOB_BRACE, $options);
+                $zip->close();
+            }
         }
         
         private function makeFileNames() {
