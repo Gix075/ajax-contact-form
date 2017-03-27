@@ -59,6 +59,13 @@ if ($name == "" || $email == "" || $msg == "") {
     return $resultmsg;
 }
 
+// Custom Fields
+$custom_fields = FALSE;
+if(isset($_REQUEST['acf_customs'])) {
+    $custom_fields = $_REQUEST['acf_customs'];
+}
+
+
 /* ********************************************************************** */
 /* MESSAGE BODY SETUP */
 /* ********************************************************************** */
@@ -75,7 +82,19 @@ $message .= "<h2 style=\"font-size:".$subtitle_size."; color:".$subtitle_color."
 $message .= "<p>Messaggio inviato da: " .$name. "<br>";
 $message .= "E-mail per la risposta: " .$email."</p>";
 $message .= "<div style=\"margin:10px 0 0 0;\">".$msg."</div>";
-$message .= "<p style=\"font-size:14px; color:#ccc;\"><em>Message sended by BRAINLEAF contactForm&trade;</em></p>";
+
+// Custom Fields
+if ($custom_fields != FALSE && is_array($custom_fields)) {
+    $message .= "<div style=\"margin:10px 0 0 0;\">";
+        foreach ($custom_fields as $key => $value) {
+            $message .= "<div style=\"margin:5px 0 0 0;\">";
+            $message .= $key.": ".$value;
+            $message .= "</div>";
+        }
+    $message .= "</div>";
+}
+
+$message .= "<p style=\"font-size:12px; color:#ccc;\"><em>Message sended by BRAINLEAF ajaxContactForm&trade;</em></p>";
 $message .= "</div>";
 
 
