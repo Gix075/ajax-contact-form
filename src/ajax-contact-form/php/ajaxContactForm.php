@@ -53,23 +53,21 @@ if($_REQUEST['acf_attachments']) {
 	$attachmentsFiles = explode(',', $attachmentsFiles);
 }
 
-if ($name == "" || $email == "" || $msg == "") {
-    $resultmsg['result'] = "fail";
-    $resultmsg['msg'] = "Name, Email and Message fields are required!";
-    return $resultmsg;
-}
-
 // Custom Fields
 $custom_fields = FALSE;
 if(isset($_REQUEST['acf_customs'])) {
     $custom_fields = $_REQUEST['acf_customs'];
 }
 
+if ($name == "" || $email == "" || $msg == "") {
+    $resultmsg['result'] = "fail";
+    $resultmsg['msg'] = "Name, Email and Message fields are required!";
+    return $resultmsg;
+}
 
 /* ********************************************************************** */
 /* MESSAGE BODY SETUP */
 /* ********************************************************************** */
-
 
 $message = "<div style=\"font-family: ".$text_font_family."; font-size:".$text_size."; color:".$text_color.";\">";
 
@@ -79,8 +77,8 @@ if ($messageImage != "") {
 
 $message .= "<h1 style=\"font-size:".$title_size."; color:".$title_color."; margin:10px 0 0 0;\">".$messageTitle."</h1>";
 $message .= "<h2 style=\"font-size:".$subtitle_size."; color:".$subtitle_color."; margin:10px 0 0 0;\">".$messageSubTitle."</h2>";
-$message .= "<p>Messaggio inviato da: " .$name. "<br>";
-$message .= "E-mail per la risposta: " .$email."</p>";
+$message .= "<p>".$messageFrom.": " .$name. "<br>";
+$message .= $messageReplyTo.": " .$email."</p>";
 $message .= "<div style=\"margin:10px 0 0 0;\">".$msg."</div>";
 
 // Custom Fields
@@ -171,7 +169,7 @@ if ($attachments == true) {
 }
 
 /* ********************************************************************** */
-/* send the message, check for errors */
+/* sends the message, checks for errors */
 /* ********************************************************************** */
 if (!$mail->send()) {
     $resultmsg['result'] = "fail";
