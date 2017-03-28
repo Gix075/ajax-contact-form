@@ -65,12 +65,13 @@
                 if(!file_put_contents($this->directory."/".$this->filename, $data)) {
                     return FALSE;
                 }
-                /*
+                
                 if ($this->json->attachments != FALSE && is_array($this->json->attachments)) {
                     if ($this->saveAttachments() == FALSE) {
                         return FALSE;
                     }
-                }*/
+                }
+                
                 return TRUE;
             }else{
                 return FALSE;
@@ -96,7 +97,7 @@
             }
         }
         
-        /*
+       
         private function zipAttachments() {
             //$attachments_log = $this->json->date." - ".$this->filename;
             //$log_file = $this->directory."/attachments.log";
@@ -104,7 +105,7 @@
             //file_put_contents($log_file, $attachments_log);
             //system('zip -P'.$this->zip_pass.' -r '.$zip_file.' '.$this->directory_attachments);
             
-            $zip = new ZipArchive();
+            /*$zip = new ZipArchive();
             $ret = $zip->open($zip_file, ZipArchive::CREATE);
             if ($ret !== TRUE) {
                 //printf('Failed with code %d', $ret);
@@ -112,8 +113,8 @@
                 $options = array('add_path' => $this->directory_attachments.'/', 'remove_all_path' => TRUE);
                 $zip->addGlob('*', GLOB_BRACE, $options);
                 $zip->close();
-            }
-        }*/
+            }*/
+        }
         
         private function makeFileNames() {
             $return = new stdClass();
