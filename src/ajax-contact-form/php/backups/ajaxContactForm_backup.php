@@ -7,151 +7,78 @@
      * -----------------------------------
      * this class provides a json backup for each message sended using AjaxContactForm
      */
-     
-    class MessageBackup  {
-        
-        function __construct($encryptKey,$encryptIv,$zipPassword,$backupDir,$senderName,$senderEmail,$privacy,$messageSubject,$messageBody,$attachmentsFilesDir,$attachmentsFiles) {
-            
-            $this->backupDir = $backupDir;
-            $this->originAttachmentsDir = $attachmentsFilesDir;
-            
-            // Makes Json file data
-            $this->json = new stdClass();
-            $this->json->sender = new stdClass();
-            $this->json->message = new stdClass();
-            $this->json->sender->name = $senderName;
-            $this->json->sender->email = $senderEmail;
-            $this->json->message->subject = $messageSubject;
-            $this->json->message->text = strip_tags($messageBody);
-            $this->json->attachments = $attachmentsFiles;
-            $this->json->privacy = $privacy;
-            $this->json->time = time();
-            $this->json->date = date("d/m/Y H:i:s",$this->json->time);
-            
-            // Filenames
-            $filenames = $this->makeFileNames();
-            $this->filename = $filenames->filename;
-            $this->directory = $filenames->directory;
-            $this->directory_attachments = $filenames->attachments;
-            
-            // Encrypt/Decrypt
-            $this->encrypt_key = $encryptKey;
-            $this->encrypt_iv = $encryptIv;
-            
-            // Zip Password
-            $this->zip_pass = $zipPassword;
-            
-            // Save Message
-            $saveMessage = $this->saveMessage();
-            if ($saveMessage == TRUE) {
-                $this->writeLog("Backup Success");
-            } else {
-                $this->writeLog("Backup Error");
-            }
-        }
 
-        private function writeLog($message) {
-            $log_date = $this->json->date;
-            $log_message = $log_date." : ".$this->filename." : ".$message.PHP_EOL;
-            if (!file_exists("backups/logs")) mkdir("backups/logs",0755);
-            file_put_contents("backups/logs/backups_logs.txt", $log_message,FILE_APPEND);
+    
+    class MessageBackup  {
+            
+        function __construct($backup_settings, $email_message) {
+            $this->settings = $backup_settings;
+            $this->message = $email_message;
+            $this->date = time();
+            $this->message->date = date("d/m/Y - H:i:s",$this->date);
+            $this->file_name = "msg_".date("Y-m-d_H-i-s",$this->date)."-".strtolower(str_replace(" ", "-", $email_message->from));
+            $this->dir_name = $this->settings->directory."/".$this->file_name;
+            $this->dir_resources = $this->dir_name."/resources";
+            $this->backupdbfile = $backup_settings->directory."/acf.backups.db.json";
+            $this->logfile = $backup_settings->directory."/acf.backups.logs.log";
         }
         
-        private function saveMessage() {
-            $mkDir = $this->makeBackupDirs();
-            if($mkDir == TRUE) {
-                $json = json_encode($this->json);
-                $data = $this->messageEncriptDecript("encrypt", $json);
-                if(!file_put_contents($this->directory."/".$this->filename, $data)) {
-                    return FALSE;
-                }
+        public function saveMessage() {
+            
+            $make_base_dir = $this->makeBackupDirs($this->dir_name);
+            $make_attachments_dir = $this->makeBackupDirs($this->dir_resources);
                 
-                if ($this->json->attachments != FALSE && is_array($this->json->attachments)) {
-                    if ($this->saveAttachments() == FALSE) {
-                        return FALSE;
-                    }
-                }
-                
-                return TRUE;
-            }else{
-                return FALSE;
+            $json = json_encode($this->message);
+            //$json = $this->messageEncryptDecrypt("encrypt", $json);
+            $save_json = FALSE;
+            $save_attachments = FALSE;
+            $save_backupsdb = FALSE;
+            $save_logs = FALSE;
+            
+            // Message
+            if(file_put_contents($this->dir_name."/".$this->file_name.".json", $json)) {
+                $save_json = TRUE;
             }
+            
+            // Attachments
+            if ($this->message->attachments != FALSE && is_array($this->message->attachments)) {
+                $save_attachments = $this->saveAttachments();
+            }else{
+                $save_attachments = TRUE;
+            }
+            
+            // Logs
+            if ($make_base_dir == TRUE && $make_attachments_dir == TRUE && $save_json == TRUE && $save_attachments == TRUE) {
+                $message = "SUCCESS (MESSAGE SAVED)";
+            }else{
+                $message = "ERROR (MESSAGE NOT SAVED)";
+            }
+            $this->writeLog($message);
         }
         
+        // ATTACHMENTS
+        // **************************************************************
         private function saveAttachments() {
-            $attachments_number = count($this->json->attachments);
+            $attachments_number = count($this->message->attachments);
             $errors = 0;
-            foreach ($this->json->attachments as $attachment) {
+            foreach ($this->message->attachments as $attachment) {
                 $attachment_filename = basename($attachment);
-                if(!copy($this->originAttachmentsDir."/".$attachment_filename, $this->directory_attachments."/".$attachment_filename)) {
+                if(!copy($this->settings->attachments_dir."/".$attachment_filename, $this->dir_resources."/".$attachment_filename)) {
                     $errors = $errors + 1;
                 }
             }
-            
-            //$this->zipAttachments();
-            
-            if ($errors > 0) {
-                return FALSE;
-            }else{
-                return TRUE;
-            }
+            return ($errors > 0) ? FALSE : TRUE;
         }
         
-       
-        private function zipAttachments() {
-            //$attachments_log = $this->json->date." - ".$this->filename;
-            //$log_file = $this->directory."/attachments.log";
-            $zip_file = $this->directory.'/'.$this->filename.'_attachments.zip';
-            //file_put_contents($log_file, $attachments_log);
-            //system('zip -P'.$this->zip_pass.' -r '.$zip_file.' '.$this->directory_attachments);
-            
-            /*$zip = new ZipArchive();
-            $ret = $zip->open($zip_file, ZipArchive::CREATE);
-            if ($ret !== TRUE) {
-                //printf('Failed with code %d', $ret);
-            } else {
-                $options = array('add_path' => $this->directory_attachments.'/', 'remove_all_path' => TRUE);
-                $zip->addGlob('*', GLOB_BRACE, $options);
-                $zip->close();
-            }*/
-        }
-        
-        private function makeFileNames() {
-            $return = new stdClass();
-            $date = date("Y-m-d_H-i-s",$this->json->time);
-            $basename = "message__".$date."__".$this->json->sender->name;
-            $basename = str_replace(" ", "-", $basename);
-            $basename = strtolower($basename);
-            $return->directory = $this->backupDir."/".$basename;
-            $return->attachments = $return->directory."/attachments";
-            $return->filename = $basename.".message";
-            return $return;
-        }
-        
-        private function makeBackupDirs() {
-            if (mkdir($this->directory,0755)) {
-                if (is_array($this->json->attachments)) {
-                    if (mkdir($this->directory_attachments,0755)) {
-                        return TRUE;
-                    } else {
-                        return FALSE;
-                    }
-                }else{
-                    return TRUE;
-                }
-            } else {
-                return FALSE;
-            }
-            
-        }
-        
-        public function messageEncriptDecript($action, $string) {
+        // TOOL: ENCRYPT / DECRYPT
+        // **************************************************************
+        protected function messageEncryptDecrypt($action, $string) {
             
                 $output = false;
             
                 $encrypt_method = "AES-256-CBC";
-                $secret_key = $this->encrypt_key;
-                $secret_iv = $this->encrypt_iv;
+                $secret_key = $backup_settings->encript_key;
+                $secret_iv = $backup_settings->encript_iv;
             
                 // hash
                 $key = hash('sha256', $secret_key);
@@ -168,8 +95,31 @@
                 }
             
                 return $output;
+   
+        }
+        
+        // TOOL: WRITE LOG
+        // **************************************************************
+        private function writeLog($message) {
+            $log_date = date("Y/m/d H:i:s",$this->date);
+            $log_message = $log_date." :: ".$this->file_name." : ".$message.PHP_EOL;
+            return file_put_contents($this->logfile, $log_message,FILE_APPEND);
+        }
+        
+        // TOOL: CREATE DIR
+        // **************************************************************
+        private function makeBackupDirs($dir) {
             
+            if (!file_exists($dir)) {
+                if (mkdir($dir,0755)) {
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+            }else{
+                return TRUE;
+            }
             
         }
+        
     }
-    

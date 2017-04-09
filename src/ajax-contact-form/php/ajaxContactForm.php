@@ -66,6 +66,28 @@ if ($name == "" || $email == "" || $msg == "") {
 }
 
 /* ********************************************************************** */
+/* MESSAGE OBJECT SETUP */
+/* At now this object will be used only for backup system */
+/* ********************************************************************** */
+$email_message = new stdClass();
+$email_message->from = $name;
+$email_message->from_email = $email;
+$email_message->subject = $subject;
+$email_message->body = $msg;
+$email_message->custom_fields = $custom_fields;
+$email_message->attachments = ($attachments == true) ? $attachmentsFiles : false;
+
+/* ********************************************************************** */
+/* BACKUP SETTINGS OBJECT SETUP */
+/* ********************************************************************** */
+$backup_settings = new stdClass();
+$backup_settings->attachments_dir = $attachmentsFilesDir;
+$backup_settings->encript_key = $backup_encrypt_key;
+$backup_settings->encript_iv = $backup_encrypt_iv;
+$backup_settings->directory = $backupsFilesDir;
+
+
+/* ********************************************************************** */
 /* MESSAGE BODY SETUP */
 /* ********************************************************************** */
 
@@ -102,9 +124,8 @@ $message .= "</div>";
 
 if ($backup_system_active == TRUE) {
     require_once 'backups/ajaxContactForm_backup.php';
-    //$backupsFilesDir
-    $backupAttachmentsFiles = ($attachments == TRUE) ? $attachmentsFiles : FALSE;
-    $backup = new MessageBackup($backup_encrypt_key,$backup_encrypt_iv,$backup_zip_password,$backupsFilesDir,$name,$email,1,$subject,$msg,$attachmentsFilesDir,$backupAttachmentsFiles);
+    $backup = new MessageBackup($backup_settings,$email_message);
+    $backup->saveMessage();
 }
 
 /* ********************************************************************** */
