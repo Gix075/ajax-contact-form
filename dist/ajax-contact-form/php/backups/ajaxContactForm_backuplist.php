@@ -1,6 +1,13 @@
 <?php
 
-//{BANNER}
+/*! 
+ * ************************************************************************* 
+ *  AjaxContactForm | Simple ajax contact form 
+ *  Version 1.10.0b - Date: 11/04/2017 
+ *  HomePage: https://github.com/Gix075/ajax-contact-form 
+ * ************************************************************************* 
+*/ 
+
 
 /**
  * BACKUP LIST PAGE CLASS

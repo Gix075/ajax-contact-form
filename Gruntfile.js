@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                     '<%= pkg.dev.distDir %>/php/ajaxContactForm_recaptcha.php':'<%= pkg.dev.devDir %>/php/ajaxContactForm_recaptcha.php',
                     '<%= pkg.dev.distDir %>/php/config.php':'<%= pkg.dev.devDir %>/php/config_dist.php',
                     '<%= pkg.dev.distDir %>/php/backups/ajaxContactForm_backup.php':'<%= pkg.dev.devDir %>/php/backups/ajaxContactForm_backup.php',
-                    '<%= pkg.dev.distDir %>/php/backups/ajaxContactForm_backup.php':'<%= pkg.dev.devDir %>/php/backups/ajaxContactForm_backuplist.php',
+                    '<%= pkg.dev.distDir %>/php/backups/ajaxContactForm_backuplist.php':'<%= pkg.dev.devDir %>/php/backups/ajaxContactForm_backuplist.php',
                     '<%= pkg.dev.distDir %>/php/acf-backups.php':'<%= pkg.dev.devDir %>/php/acf-backups.php',
                     '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_attachments.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_attachments.php',
                     '<%= pkg.dev.distDir %>/php/attachments/ajaxContactForm_cleaner.php':'<%= pkg.dev.devDir %>/php/attachments/ajaxContactForm_cleaner.php',

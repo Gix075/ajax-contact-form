@@ -1,0 +1,8 @@
+# CHANGE [yoursitedomain.com] with you real site name! 
+
+<IfModule mod_rewrite.c>
+ RewriteEngine on 
+ RewriteCond %{HTTP_REFERER} !^http://(www\.)?[yoursitedomain.com]/.*$ [NC]
+ RewriteCond %{HTTP_REFERER} !^http://(www\.)?[yoursitedomain.com]$ [NC]
+ RewriteRule .*\.(jpg|jpeg|gif|png|bmp|js|css|json)$ - [F]
+ </ifModule>

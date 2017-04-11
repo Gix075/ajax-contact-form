@@ -1,4 +1,4 @@
-# Ajax Contact Form (v.1.10.0 alpha 1.6)
+# Ajax Contact Form (v.1.10.0 beta)
 
 An easy to use and hightly customizable Ajax Contact Form, including inputs validation and Google ReCaptcha.
 

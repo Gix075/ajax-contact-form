@@ -3,7 +3,7 @@
 /*! 
  * ************************************************************************* 
  *  AjaxContactForm | Simple ajax contact form 
- *  Version 1.9.0 - Date: 19/03/2017 
+ *  Version 1.10.0b - Date: 11/04/2017 
  *  HomePage: https://github.com/Gix075/ajax-contact-form 
  * ************************************************************************* 
 */ 
@@ -76,4 +76,16 @@ $smtp_host = ""; // your smtp server url (example: mail.yourdomain.com)
 $smtp_port = 25; // Your smtp port
 $smtp_username = ""; // smtp username
 $smtp_password = ""; // smtp password
-?>
+
+
+/* Backup System (Optional) */
+/* ******************************* */
+
+// Backup system provides a copy for each message that will be sent by users.
+// If backup system is enabled the form will save a json encrypted copy of the mail message.
+
+$backup_system_active = true;
+$backup_encrypt_key = "123456789"; // THIS VALUE MUST BE CHANGED!
+$backup_encrypt_iv = "987654321"; // THIS VALUE MUST BE CHANGED!
+$backup_zip_password = "zipPassword123456"; // THIS VALUE IS ONLY FOR FUTURE UPGRADE, PLEASE IGNORE IT AT NOW.
+
